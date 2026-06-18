@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter Qualitätsprüfung – swisscom</title>
+<style>
+  :root {
+    --navy:   #001155;
+    --navy2:  #000E44;
+    --text:   #001155;
+    --text-s: #4A4A6A;
+    --bg:     #F5F5F7;
+    --white:  #FFFFFF;
+    --border: #DADAE8;
+    --red:    #CC001A;
+    --teal:   #003D5C;
+    --green:  #00875A;
+    --radius: 8px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ──────────────────────────────────────────── */
+  header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    gap: 24px;
+  }
+  .sc-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .hd-divider { width: 1px; height: 28px; background: var(--border); }
+  .hd-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.1px;
+  }
+
+  /* ── Main ────────────────────────────────────────────── */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 56px 20px 60px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 16px rgba(0,17,85,0.07);
+    width: 100%;
+    max-width: 500px;
+    padding: 40px 40px 44px;
+  }
+
+  .card-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--text-s);
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  /* ── Fields ──────────────────────────────────────────── */
+  .field { margin-bottom: 22px; }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 7px;
+    letter-spacing: 0.1px;
+  }
+
+  .field input[type="url"],
+  .field input[type="text"] {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--navy);
+    outline: none;
+    transition: border-color 0.12s, box-shadow 0.12s;
+    background: var(--white);
+  }
+  .field input:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(0,17,85,0.1);
+  }
+  .field input::placeholder { color: #AAAACC; }
+  .field-hint {
+    font-size: 12px;
+    color: var(--text-s);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+  .field-hint code {
+    background: #EEF0F8;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 11.5px;
+    color: var(--navy);
+    font-family: 'SF Mono', Consolas, monospace;
+  }
+
+  /* ── Language selector ───────────────────────────────── */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 7px;
+  }
+  .lang-opt { position: relative; }
+  .lang-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; }
+  .lang-opt label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 13px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-s);
+    text-transform: none;
+    letter-spacing: 0;
+    transition: all 0.12s;
+    user-select: none;
+    background: var(--white);
+  }
+  .lang-opt label .fl { font-size: 22px; }
+  .lang-opt input:checked + label {
+    border-color: var(--navy);
+    color: var(--navy);
+    background: #EEF0F8;
+  }
+  .lang-opt label:hover { border-color: var(--navy); }
+
+  /* ── Divider ─────────────────────────────────────────── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+
+  /* ── Button ──────────────────────────────────────────── */
+  .btn {
+    display: block;
+    width: 100%;
+    height: 52px;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 10px;
+    transition: background 0.12s, transform 0.08s;
+    letter-spacing: 0.1px;
+  }
+  .btn:hover  { background: var(--navy2); }
+  .btn:active { transform: scale(0.99); }
+
+  /* ── Error ───────────────────────────────────────────── */
+  .err {
+    background: #FFF0F2;
+    border: 1px solid #FFBBCC;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--red);
+    margin-top: 14px;
+    display: none;
+  }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #9999BB;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="hd-title">Newsletter Qualitätsprüfung</span>
+</header>
+
+<main>
+  <div class="card">
+    <h1 class="card-title">Newsletter analysieren</h1>
+    <p class="card-sub">Grammatik · Du/Sie · WCAG 2.1 AA · Deeplinks – alle Checks in einem Schritt</p>
+
+    <form id="analyseForm">
+
+      <div class="field">
+        <label for="nlUrl">Newsletter URL</label>
+        <input type="url" id="nlUrl"
+               placeholder="https://blue-studio-preview-v2.addmail.ch/…" required />
+      </div>
+
+      <div class="field">
+        <label>Sprache des Newsletters</label>
+        <div class="lang-grid">
+          <div class="lang-opt">
+            <input type="radio" name="language" id="lang-de" value="Deutsch (DE)" checked>
+            <label for="lang-de"><span class="fl">🇩🇪</span>Deutsch</label>
+          </div>
+          <div class="lang-opt">
+            <input type="radio" name="language" id="lang-fr" value="Français (FR)">
+            <label for="lang-fr"><span class="fl">🇫🇷</span>Français</label>
+          </div>
+          <div class="lang-opt">
+            <input type="radio" name="language" id="lang-it" value="Italiano (IT)">
+            <label for="lang-it"><span class="fl">🇮🇹</span>Italiano</label>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <label for="webhookUrl">n8n Webhook URL</label>
+        <input type="url" id="webhookUrl"
+               placeholder="https://…n8n.cloud/webhook/newsletter-analyse" required />
+        <div class="field-hint">
+          Test: <code>/webhook-test/newsletter-analyse</code> &nbsp;·&nbsp;
+          Produktiv: <code>/webhook/newsletter-analyse</code>
+        </div>
+      </div>
+
+      <div class="err" id="errMsg"></div>
+
+      <button type="submit" class="btn">Analyse starten →</button>
+
+    </form>
+  </div>
+</main>
+
+<footer>© swisscom AG &nbsp;·&nbsp; Newsletter Qualitätsprüfung &nbsp;·&nbsp; Internes Tool</footer>
+
+<script>
+  var saved = localStorage.getItem('sc_webhook');
+  if (saved) document.getElementById('webhookUrl').value = saved;
+
+  document.getElementById('analyseForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nlUrl = document.getElementById('nlUrl').value.trim();
+    var lang  = document.querySelector('input[name="language"]:checked').value;
+    var whUrl = document.getElementById('webhookUrl').value.trim();
+    var errEl = document.getElementById('errMsg');
+    if (!whUrl) {
+      errEl.textContent = 'Bitte n8n Webhook-URL eingeben.';
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+    localStorage.setItem('sc_webhook', whUrl);
+    var f = document.createElement('form');
+    f.method = 'POST'; f.action = whUrl; f.target = '_blank';
+    [['url', nlUrl], ['language', lang]].forEach(function(p) {
+      var inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = p[0]; inp.value = p[1];
+      f.appendChild(inp);
+    });
+    document.body.appendChild(f);
+    f.submit();
+  });
+</script>
+
+</body>
+</html>
