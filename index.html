@@ -1,305 +1,245 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Newsletter Qualitätsprüfung – swisscom</title>
-<style>
-  :root {
-    --navy:   #001155;
-    --navy2:  #000E44;
-    --text:   #001155;
-    --text-s: #4A4A6A;
-    --bg:     #F5F5F7;
-    --white:  #FFFFFF;
-    --border: #DADAE8;
-    --red:    #CC001A;
-    --teal:   #003D5C;
-    --green:  #00875A;
-    --radius: 8px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter Qualitätsprüfung</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      background: #F5F5F7;
+      color: #001155;
+      min-height: 100vh;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #DADAE8;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      gap: 20px;
+    }
+    .logo { font-size: 18px; font-weight: 800; color: #001155; letter-spacing: -.3px; }
+    .logo span { color: #009DE0; }
+    .hd-div { width: 1px; height: 28px; background: #DADAE8; }
+    .hd-sub { font-size: 13px; color: #4A4A6A; font-weight: 500; }
+    .badge { margin-left: auto; font-size: 11px; font-weight: 700; background: #E6F0FF; color: #001155; padding: 4px 12px; border-radius: 20px; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-  }
+    .container { max-width: 680px; margin: 48px auto; padding: 0 24px; }
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+    .subtitle { font-size: 14px; color: #4A4A6A; margin-bottom: 32px; }
 
-  /* ── Header ──────────────────────────────────────────── */
-  header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    height: 72px;
-    display: flex;
-    align-items: center;
-    padding: 0 40px;
-    gap: 24px;
-  }
-  .sc-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-  }
-  .hd-divider { width: 1px; height: 28px; background: var(--border); }
-  .hd-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: -0.1px;
-  }
+    .card { background: #fff; border: 1px solid #DADAE8; border-radius: 12px; overflow: hidden; }
+    .card-body { padding: 28px 32px; display: flex; flex-direction: column; gap: 22px; }
 
-  /* ── Main ────────────────────────────────────────────── */
-  main {
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 56px 20px 60px;
-  }
+    label { font-size: 13px; font-weight: 700; color: #001155; display: block; margin-bottom: 7px; }
+    .hint { font-size: 11px; color: #9999BB; margin-top: 4px; }
 
-  .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 16px rgba(0,17,85,0.07);
-    width: 100%;
-    max-width: 500px;
-    padding: 40px 40px 44px;
-  }
+    input[type="url"] {
+      width: 100%; height: 48px;
+      border: 1.5px solid #DADAE8; border-radius: 8px;
+      padding: 0 16px; font-size: 14px; color: #001155;
+      outline: none; transition: border-color .15s; background: #fff;
+    }
+    input[type="url"]:focus { border-color: #009DE0; }
+    input[type="url"]::placeholder { color: #BBBBCC; }
 
-  .card-title {
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--navy);
-    margin-bottom: 6px;
-    letter-spacing: -0.3px;
-  }
-  .card-sub {
-    font-size: 14px;
-    color: var(--text-s);
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
+    select {
+      width: 100%; height: 48px;
+      border: 1.5px solid #DADAE8; border-radius: 8px;
+      padding: 0 16px; font-size: 14px; color: #001155;
+      outline: none; background: #fff; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239999BB' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center;
+      cursor: pointer; transition: border-color .15s;
+    }
+    select:focus { border-color: #009DE0; }
 
-  /* ── Fields ──────────────────────────────────────────── */
-  .field { margin-bottom: 22px; }
+    .btn {
+      width: 100%; height: 52px;
+      background: #009DE0; color: #fff;
+      border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: background .15s, transform .1s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn:hover { background: #007BBF; }
+    .btn:active { transform: scale(.99); }
+    .btn:disabled { background: #DADAE8; color: #9999BB; cursor: not-allowed; transform: none; }
 
-  .field label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 7px;
-    letter-spacing: 0.1px;
-  }
+    .loading { display: none; flex-direction: column; align-items: center; gap: 14px; padding: 32px; color: #4A4A6A; font-size: 14px; }
+    .loading.show { display: flex; }
+    .spinner { width: 36px; height: 36px; border: 3px solid #DADAE8; border-top-color: #009DE0; border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-steps { font-size: 12px; color: #9999BB; text-align: center; }
 
-  .field input[type="url"],
-  .field input[type="text"] {
-    width: 100%;
-    height: 48px;
-    padding: 0 14px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    font-size: 15px;
-    font-family: inherit;
-    color: var(--navy);
-    outline: none;
-    transition: border-color 0.12s, box-shadow 0.12s;
-    background: var(--white);
-  }
-  .field input:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(0,17,85,0.1);
-  }
-  .field input::placeholder { color: #AAAACC; }
-  .field-hint {
-    font-size: 12px;
-    color: var(--text-s);
-    margin-top: 6px;
-    line-height: 1.6;
-  }
-  .field-hint code {
-    background: #EEF0F8;
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 11.5px;
-    color: var(--navy);
-    font-family: 'SF Mono', Consolas, monospace;
-  }
+    .error-box { display: none; background: #FFF0F2; border: 1px solid #FFCCD4; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #CC001A; }
+    .error-box.show { display: block; }
 
-  /* ── Language selector ───────────────────────────────── */
-  .lang-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-top: 7px;
-  }
-  .lang-opt { position: relative; }
-  .lang-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; }
-  .lang-opt label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    padding: 13px 8px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-s);
-    text-transform: none;
-    letter-spacing: 0;
-    transition: all 0.12s;
-    user-select: none;
-    background: var(--white);
-  }
-  .lang-opt label .fl { font-size: 22px; }
-  .lang-opt input:checked + label {
-    border-color: var(--navy);
-    color: var(--navy);
-    background: #EEF0F8;
-  }
-  .lang-opt label:hover { border-color: var(--navy); }
+    #result-wrap { display: none; margin-top: 24px; }
+    #result-wrap.show { display: block; }
+    .result-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .result-title { font-size: 14px; font-weight: 700; color: #001155; flex: 1; }
+    .btn-sm {
+      height: 34px; padding: 0 16px; border-radius: 7px;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      border: 1.5px solid #DADAE8; background: #fff; color: #001155;
+      transition: border-color .12s, background .12s;
+    }
+    .btn-sm:hover { border-color: #009DE0; background: #F0F8FF; }
+    .btn-sm.primary { background: #009DE0; color: #fff; border-color: #009DE0; }
+    .btn-sm.primary:hover { background: #007BBF; border-color: #007BBF; }
+    iframe#result { width: 100%; height: 82vh; border: 1px solid #DADAE8; border-radius: 10px; background: #fff; }
 
-  /* ── Divider ─────────────────────────────────────────── */
-  .divider { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
-
-  /* ── Button ──────────────────────────────────────────── */
-  .btn {
-    display: block;
-    width: 100%;
-    height: 52px;
-    background: var(--navy);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: inherit;
-    margin-top: 10px;
-    transition: background 0.12s, transform 0.08s;
-    letter-spacing: 0.1px;
-  }
-  .btn:hover  { background: var(--navy2); }
-  .btn:active { transform: scale(0.99); }
-
-  /* ── Error ───────────────────────────────────────────── */
-  .err {
-    background: #FFF0F2;
-    border: 1px solid #FFBBCC;
-    border-radius: var(--radius);
-    padding: 10px 14px;
-    font-size: 13px;
-    color: var(--red);
-    margin-top: 14px;
-    display: none;
-  }
-
-  /* ── Footer ──────────────────────────────────────────── */
-  footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 12px;
-    color: #9999BB;
-    border-top: 1px solid var(--border);
-    background: var(--white);
-  }
-</style>
+    footer { text-align: center; padding: 32px 24px; font-size: 11px; color: #BBBBCC; }
+  </style>
 </head>
 <body>
 
 <header>
-  <span class="hd-title">Newsletter Qualitätsprüfung</span>
+  <img src="data:image/png;base64,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" alt="Swisscom" style="height:36px;width:auto;display:block">
+  <div class="hd-div"></div>
+  <span class="hd-sub">Newsletter Qualitätsprüfung</span>
+  <span class="badge">Styleguide 2025</span>
 </header>
 
-<main>
+<div class="container">
+  <h1>Newsletter analysieren</h1>
+  <p class="subtitle">URL eingeben – der Bericht erscheint direkt hier.</p>
+
   <div class="card">
-    <h1 class="card-title">Newsletter analysieren</h1>
-    <p class="card-sub">Grammatik · Du/Sie · WCAG 2.1 AA · Deeplinks – alle Checks in einem Schritt</p>
+    <div class="card-body">
 
-    <form id="analyseForm">
-
-      <div class="field">
-        <label for="nlUrl">Newsletter URL</label>
-        <input type="url" id="nlUrl"
-               placeholder="https://blue-studio-preview-v2.addmail.ch/…" required />
+      <div>
+        <label for="nl-url">Newsletter-URL</label>
+        <input type="url" id="nl-url" placeholder="https://..." autocomplete="off" spellcheck="false">
+        <div class="hint">Direktlink zur HTML-Version des Newsletters (z.B. Webansicht-URL)</div>
       </div>
 
-      <div class="field">
-        <label>Sprache des Newsletters</label>
-        <div class="lang-grid">
-          <div class="lang-opt">
-            <input type="radio" name="language" id="lang-de" value="Deutsch (DE)" checked>
-            <label for="lang-de"><span class="fl">🇩🇪</span>Deutsch</label>
-          </div>
-          <div class="lang-opt">
-            <input type="radio" name="language" id="lang-fr" value="Français (FR)">
-            <label for="lang-fr"><span class="fl">🇫🇷</span>Français</label>
-          </div>
-          <div class="lang-opt">
-            <input type="radio" name="language" id="lang-it" value="Italiano (IT)">
-            <label for="lang-it"><span class="fl">🇮🇹</span>Italiano</label>
-          </div>
-        </div>
+      <div>
+        <label for="lang-select">Sprache</label>
+        <select id="lang-select">
+          <option value="Deutsch (DE)">🇩🇪 Deutsch (DE)</option>
+          <option value="Französisch (FR)">🇫🇷 Französisch (FR)</option>
+          <option value="Italienisch (IT)">🇮🇹 Italienisch (IT)</option>
+        </select>
       </div>
 
-      <hr class="divider">
+      <div class="error-box" id="error-box"></div>
 
-      <div class="field">
-        <label for="webhookUrl">n8n Webhook URL</label>
-        <input type="url" id="webhookUrl"
-               placeholder="https://…n8n.cloud/webhook/newsletter-analyse" required />
-        <div class="field-hint">
-          Test: <code>/webhook-test/newsletter-analyse</code> &nbsp;·&nbsp;
-          Produktiv: <code>/webhook/newsletter-analyse</code>
-        </div>
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div>Analyse läuft…</div>
+        <div class="loading-steps" id="loading-steps">Newsletter wird geladen…</div>
       </div>
 
-      <div class="err" id="errMsg"></div>
+      <button class="btn" id="submit-btn" onclick="submitForm()">
+        <span>🔍</span> Newsletter prüfen
+      </button>
 
-      <button type="submit" class="btn">Analyse starten →</button>
-
-    </form>
+    </div>
   </div>
-</main>
 
-<footer>© swisscom AG &nbsp;·&nbsp; Newsletter Qualitätsprüfung &nbsp;·&nbsp; Internes Tool</footer>
+  <div id="result-wrap">
+    <div class="result-toolbar">
+      <span class="result-title">📋 Analysebericht</span>
+      <button class="btn-sm" onclick="openInTab()">↗ Vollbild öffnen</button>
+      <button class="btn-sm primary" onclick="resetForm()">+ Neue Analyse</button>
+    </div>
+    <iframe id="result" title="Analysebericht"></iframe>
+  </div>
+</div>
+
+<footer>swisscom AG · Newsletter Qualitätsprüfung · Styleguide 2025</footer>
 
 <script>
-  var saved = localStorage.getItem('sc_webhook');
-  if (saved) document.getElementById('webhookUrl').value = saved;
+  var resultBlob = null;
+  var msgTimer = null;
+  var msgIdx = 0;
+  var loadingMessages = [
+    'Newsletter wird geladen…',
+    'Links werden geprüft…',
+    'Sitemap wird abgeglichen…',
+    'KI-Analyse läuft…',
+    'Bericht wird erstellt…'
+  ];
 
-  document.getElementById('analyseForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var nlUrl = document.getElementById('nlUrl').value.trim();
-    var lang  = document.querySelector('input[name="language"]:checked').value;
-    var whUrl = document.getElementById('webhookUrl').value.trim();
-    var errEl = document.getElementById('errMsg');
-    if (!whUrl) {
-      errEl.textContent = 'Bitte n8n Webhook-URL eingeben.';
-      errEl.style.display = 'block';
+  function startLoadingMessages() {
+    msgIdx = 0;
+    document.getElementById('loading-steps').textContent = loadingMessages[0];
+    msgTimer = setInterval(function(){
+      msgIdx = (msgIdx + 1) % loadingMessages.length;
+      document.getElementById('loading-steps').textContent = loadingMessages[msgIdx];
+    }, 5000);
+  }
+
+  function stopLoadingMessages() { if (msgTimer) clearInterval(msgTimer); }
+
+  function showError(msg) {
+    var box = document.getElementById('error-box');
+    box.textContent = '⚠ ' + msg;
+    box.classList.add('show');
+  }
+
+  function hideError() { document.getElementById('error-box').classList.remove('show'); }
+
+  function setLoading(on) {
+    document.getElementById('loading').classList.toggle('show', on);
+    document.getElementById('submit-btn').disabled = on;
+    if (on) startLoadingMessages(); else stopLoadingMessages();
+  }
+
+  function submitForm() {
+    hideError();
+    var url = document.getElementById('nl-url').value.trim();
+    if (!url || !url.startsWith('http')) {
+      showError('Bitte eine gültige URL eingeben (beginnt mit http/https).');
       return;
     }
-    errEl.style.display = 'none';
-    localStorage.setItem('sc_webhook', whUrl);
-    var f = document.createElement('form');
-    f.method = 'POST'; f.action = whUrl; f.target = '_blank';
-    [['url', nlUrl], ['language', lang]].forEach(function(p) {
-      var inp = document.createElement('input');
-      inp.type = 'hidden'; inp.name = p[0]; inp.value = p[1];
-      f.appendChild(inp);
+    var lang = document.getElementById('lang-select').value;
+
+    setLoading(true);
+    document.getElementById('result-wrap').classList.remove('show');
+
+    fetch('https://taacain1.app.n8n.cloud/webhook/newsletter-analyse', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: url, language: lang })
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('Server-Fehler: ' + r.status);
+      return r.text();
+    })
+    .then(function(html) {
+      setLoading(false);
+      var blob = new Blob([html], { type: 'text/html' });
+      if (resultBlob) URL.revokeObjectURL(resultBlob);
+      resultBlob = URL.createObjectURL(blob);
+      document.getElementById('result').src = resultBlob;
+      document.getElementById('result-wrap').classList.add('show');
+      document.getElementById('result-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    })
+    .catch(function(err) {
+      setLoading(false);
+      showError('Analyse fehlgeschlagen: ' + err.message);
     });
-    document.body.appendChild(f);
-    f.submit();
+  }
+
+  function openInTab() { if (resultBlob) window.open(resultBlob, '_blank'); }
+
+  function resetForm() {
+    document.getElementById('nl-url').value = '';
+    document.getElementById('lang-select').selectedIndex = 0;
+    document.getElementById('result-wrap').classList.remove('show');
+    hideError();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('nl-url').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') submitForm();
   });
 </script>
 
